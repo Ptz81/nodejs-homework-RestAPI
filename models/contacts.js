@@ -9,19 +9,30 @@ import {nanoid} from 'nanoid';
 const contactsPath = path.resolve('models', 'contacts.json');
 
 export const listContacts = async () => {
-   const data = await fs.readFile(contactsPath);
+  try {
+    const data = await fs.readFile(contactsPath);
     return JSON.parse(data)
+  }
+  catch (error) {
+    console.log(error.message)
+   }
 }
 
 export const getContactById = async (id) => {
-    const contactId = String(id);
+  try {
+     const contactId = String(id);
     const contacts = await listContacts();
     const result = contacts.find(contact => contact.id === contactId);
     return result || null;
+  } catch (error) {
+    console.log(error.message)
+   }
+   
 }
 
 export const removeContact = async (id) => {
-  const contactId = String(id);
+  try {
+    const contactId = String(id);
     const contacts = await listContacts();
     const index = contacts.find(contact => contact.id === contactId);
     if (index === -1) {
@@ -30,10 +41,15 @@ export const removeContact = async (id) => {
     const [result] = contacts.splice(index, 1);
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
     return result;
+  } catch (error) {
+    console.log(error.message)
+   }
+  
 }
 
 export const addContact = async (data) => {
-  const contacts = await listContacts();
+  try {
+    const contacts = await listContacts();
     const newContact = {
         id:nanoid(),
         ...data
@@ -41,10 +57,15 @@ export const addContact = async (data) => {
     contacts.push(newContact);
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
     return newContact;
+  } catch (error) {
+    console.log(error.message)
+   }
+  
 }
 
 export const updateContact = async (id, data) => {
-  const contactId = String(id);
+  try {
+     const contactId = String(id);
     const contacts = await listContacts();
     const index = contacts.find(contact => contact.id === contactId);
     if (index === -1) {
@@ -53,6 +74,10 @@ export const updateContact = async (id, data) => {
     contacts[index] = {contactId, ...data };
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
     return contacts[index];
+  } catch (error) {
+    console.log(error.message)
+   }
+ 
 }
 
 export default {
