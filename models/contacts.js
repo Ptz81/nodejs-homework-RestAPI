@@ -14,7 +14,9 @@ export const listContacts = async () => {
     return JSON.parse(data)
   }
   catch (error) {
-    console.log(error.message)
+    res.status(500).json({
+      message: "Server error"
+    })
    }
 }
 
@@ -25,7 +27,9 @@ export const getContactById = async (id) => {
     const result = contacts.find(contact => contact.id === contactId);
     return result || null;
   } catch (error) {
-    console.log(error.message)
+    res.status(500).json({
+      message: "Server error"
+    })
    }
    
 }
@@ -42,7 +46,9 @@ export const removeContact = async (id) => {
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
     return result;
   } catch (error) {
-    console.log(error.message)
+    res.status(500).json({
+      message: "Server error"
+    })
    }
   
 }
@@ -58,7 +64,9 @@ export const addContact = async (data) => {
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
     return newContact;
   } catch (error) {
-    console.log(error.message)
+    res.status(500).json({
+      message: "Server error"
+    })
    }
   
 }
@@ -75,7 +83,9 @@ export const updateContact = async (id, data) => {
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
     return contacts[index];
   } catch (error) {
-    console.log(error.message)
+    res.status(500).json({
+      message: "Server error"
+    })
    }
  
 }

@@ -11,7 +11,9 @@ router.get('/', async (req, res, next) => {
     const result = await contacts.listContacts();
   res.json(result);
   }catch (error) {
-    console.log(error.message)
+    res.status(500).json({
+      message: "Server error"
+    })
    }
   
 })
@@ -21,7 +23,9 @@ router.get('/:contactId', async (req, res, next) => {
     const result = await contacts.getContactById(id)
   res.json(result);
   } catch (error) {
-    console.log(error.message)
+    res.status(500).json({
+      message: "Server error"
+    })
    }
   
 })
@@ -31,7 +35,9 @@ router.post('/', async (req, res, next) => {
     const result = await contacts.addContact(name, email, phone);
   res.json(result)
   } catch (error) {
-    console.log(error.message)
+   res.status(500).json({
+      message: "Server error"
+    })
    }
    
 })
@@ -41,7 +47,9 @@ router.delete('/:contactId', async (req, res, next) => {
     const result = await contacts.removeContact(id);
   res.json(result)
   } catch (error) {
-    console.log(error.message)
+    res.status(500).json({
+      message: "Server error"
+    })
    }
   
 })
@@ -51,7 +59,9 @@ router.put('/:contactId', async (req, res, next) => {
     const result = await contacts.updateContact(id, { name, email, phone });
   res.json(result)
   } catch (error) {
-    console.log(error.message)
+    res.status(500).json({
+      message: "Server error"
+    })
    }
    
 })
