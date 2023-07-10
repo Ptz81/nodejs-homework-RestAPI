@@ -1,25 +1,34 @@
-const express = require('express')
+// const express = require('express')
+// const contacts = require('../../models/contacts')
+import express from 'express';
+import contacts from '../../models/contacts.js';
 
 const router = express.Router()
+const { id, name, phone, email } = contacts;
 
 router.get('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
+  const result = await contacts.listContacts();
+  res.json(result);
 })
 
 router.get('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
+  const result = await contacts.getContactById(id)
+  res.json(result);
 })
 
 router.post('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
+   const result = await contacts.addContact(name, email, phone);
+  res.json(result)
 })
 
 router.delete('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
+  const result = await contacts.removeContact(id);
+  res.json(result)
 })
 
 router.put('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
+   const result = await contacts.updateContact(id, { name, email, phone });
+  res.json(result)
 })
 
-module.exports = router
+export default router;
