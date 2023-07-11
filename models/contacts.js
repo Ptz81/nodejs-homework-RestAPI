@@ -1,4 +1,4 @@
-// const { json } = require('body-parser');
+// import { json } from 'body-parser';
 // const fs = require('fs/promises');
 // const {nanoid} = require('nanoid');
 // const contactsPath = path.join(__dirname, 'contacts.json');
@@ -67,19 +67,17 @@ export const addContact = async (data) => {
     res.status(500).json({
       message: "Server error"
     })
-   }
-  
+  }
 }
 
 export const updateContact = async (id, data) => {
   try {
-     const contactId = String(id);
     const contacts = await listContacts();
-    const index = contacts.find(contact => contact.id === contactId);
+    const index = contacts.find(contact => contact.id === id);
     if (index === -1) {
         return null;
     }
-    contacts[index] = {contactId, ...data };
+    contacts[index] = {id, ...data };
     await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
     return contacts[index];
   } catch (error) {
