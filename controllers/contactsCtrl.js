@@ -1,22 +1,12 @@
-import Joi from 'joi';
 import contacts from '../models/contacts.js';
-import HttpErrors from '../helpers/HttpError.js';
 import ctrlWrapper from '../helpers/ctrlWrapper.js';
 
-export const addSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().required(),
-  phone: Joi.string().length(10)
-    .pattern(/\([0-9]\){3}[0-9]{7}/i)
-    .required(),
-})
-
-export const getAll = async (req, res) => {
+const getAll = async (req, res) => {
     const result = await contacts.listContacts();
   res.json(result);
 }
 
-export const getById = async (req, res) => {
+const getById = async (req, res) => {
     const { id } = req.params;
     const result = await contacts.getContactById(id)
     if (!result) {
@@ -25,16 +15,12 @@ export const getById = async (req, res) => {
     res.json(result);
 }
 
-export const addContact = async (req, res) => {
-    const { error } = addSchema.validate(req.body);
-    if (error) {
-      throw HttpErrors(400, error.message);
-    }
+const addContact = async (req, res) => {
     const result = await contacts.addContact(req.body);
     res.status(201).json(result);
 }
 
-export const deleteContact = async (req, res) => {
+const deleteContact = async (req, res) => {
     const { id } = req.params;
     const result = await contacts.removeContact(id);
     if (!result) {
@@ -46,11 +32,7 @@ export const deleteContact = async (req, res) => {
   })
 }
 
-export const updateContact = async (req, res) => {
-    const { error } = addSchema.validate(req.body)
-    if (error) {
-      throw HttpErrors(400, error.message);
-    }
+const updateContact = async (req, res) => {
     const { id } = req.params;
     const result = await contacts.updateContact(id, req.body);
 if (!result) {

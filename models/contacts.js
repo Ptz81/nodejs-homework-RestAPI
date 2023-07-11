@@ -8,7 +8,7 @@ import {nanoid} from 'nanoid';
 
 const contactsPath = path.resolve('models', 'contacts.json');
 
-export const listContacts = async () => {
+const listContacts = async () => {
   try {
     const data = await fs.readFile(contactsPath);
     return JSON.parse(data)
@@ -20,7 +20,7 @@ export const listContacts = async () => {
    }
 }
 
-export const getContactById = async (id) => {
+const getContactById = async (id) => {
   try {
      const contactId = String(id);
     const contacts = await listContacts();
@@ -34,7 +34,7 @@ export const getContactById = async (id) => {
    
 }
 
-export const removeContact = async (id) => {
+const removeContact = async (id) => {
   try {
     const contactId = String(id);
     const contacts = await listContacts();
@@ -53,7 +53,7 @@ export const removeContact = async (id) => {
   
 }
 
-export const addContact = async (data) => {
+const addContact = async (data) => {
   try {
     const contacts = await listContacts();
     const newContact = {
@@ -70,7 +70,7 @@ export const addContact = async (data) => {
   }
 }
 
-export const updateContact = async (id, data) => {
+const updateContact = async (id, data) => {
   try {
     const contacts = await listContacts();
     const index = contacts.find(contact => contact.id === id);
