@@ -1,7 +1,3 @@
-// import { json } from 'body-parser';
-// const fs = require('fs/promises');
-// const {nanoid} = require('nanoid');
-// const contactsPath = path.join(__dirname, 'contacts.json');
 import fs from 'fs/promises';
 import path from 'path';
 import {nanoid} from 'nanoid';
