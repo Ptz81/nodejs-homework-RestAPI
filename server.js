@@ -1,7 +1,8 @@
 import app from "./app.js"
 import mongoose from "mongoose"
+import DB_HOST from "./config.js"
 
-const DB_HOST = 'mongodb+srv://Taras:12345qwert@cluster0.ycalfsm.mongodb.net/Contacts_book?retryWrites=true&w=majority'
+
 
 mongoose.set('strictQuery', true)
 
