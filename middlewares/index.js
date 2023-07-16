@@ -1,2 +1,7 @@
-import validateBody from "./validateBody.js";
-export default validateBody;
+import {validateBody} from "./validateBody.js";
+import {isValidId} from "./isValidId.js";
+
+export default {
+    validateBody,
+    isValidId,
+};
