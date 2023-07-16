@@ -1,4 +1,4 @@
-import { isValidObjectId } from "mongoose";
+import isValidObjectId from "mongoose";
 import HttpErrors from "../helpers/HttpError.js";
 
 

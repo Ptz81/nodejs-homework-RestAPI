@@ -21,11 +21,10 @@ const addContact = async (req, res) => {
 }
 const deleteContact = async (req, res) => {
     const { id } = req.params;
-    const result = await Contact.findByIdAndRemove(id);
+    const result = await Contact.findByIdAndDelete(id);
     if (!result) {
       throw HttpErrors(404, "Not found")
     }
-    // res.status(204).send()
     res.json({
     message: "Status:204. Successful removal!"
   })

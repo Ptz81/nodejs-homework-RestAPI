@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
-import handleMongooseError from "../helpers/handleMongooseError.js";
 import Joi from "joi";
+import handleMongooseError from "../helpers/handleMongooseError.js";
+
 
 const contactSchema = new Schema({
   name: {
