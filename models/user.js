@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
-import Joi from "joi";
 import handleMongooseError from "../helpers/handleMongooseError.js";
+import Joi from "joi";
 
 const emailRegexp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -21,15 +21,14 @@ const userSchema = new Schema({
         required: true,
     },
 
-}, { versionKey: false, timestamps: true })
+}, { versionKey: false, timestamps: true });
 
 userSchema.post("save", handleMongooseError);
 
 const registerSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().min().required(),
-  
+  password: Joi.string().min(6).required(),
 })
 
 const loginSchema = Joi.object({
