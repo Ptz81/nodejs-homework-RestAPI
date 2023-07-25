@@ -1,20 +1,21 @@
 import express from 'express';
 const router = express.Router()
 import ctrl from '../../controllers/contactsCtrl.js';
-import { isValidId } from '../../middlewares/isValidId.js';
+import {isValidId} from '../../middlewares/isValidId.js';
 import { schemaSet } from '../../models/contact.js';
 import validateBody from '../../middlewares/validateBody.js';
+import authenticate from '../../middlewares/authenticate.js'
 
 
-router.get('/', ctrl.getAll);
+router.get('/', authenticate, ctrl.getAll);
 
-router.get('/:id', isValidId, ctrl.getById);
+router.get('/:id',authenticate, isValidId, ctrl.getById);
 
-router.post('/', validateBody(schemaSet.addSchema), ctrl.addContact);
+router.post('/', authenticate, validateBody(schemaSet.addSchema), ctrl.addContact);
 
-router.delete('/:id', isValidId, ctrl.deleteContact);
+router.delete('/:id', authenticate, isValidId, ctrl.deleteContact);
 
-router.put('/:id', isValidId, validateBody(schemaSet.addSchema), ctrl.updateContact);
+router.put('/:id', authenticate, isValidId, validateBody(schemaSet.addSchema), ctrl.updateContact);
 router.patch('/:id/favorite', isValidId, validateBody(schemaSet.updateFavoriteSchema), ctrl.updateFavorite);
 
 export default router;
