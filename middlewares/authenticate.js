@@ -10,11 +10,12 @@ const authenticate = async(req, res, next) => {
         next(HttpErrors(401));
     }//перевірка чи Bearer відповідає 
     try {
-        const { id } = jwt.verify(token, SECRET_KEY); //перевірка чи ми кодували і чи правильний токен
+        const { id } = jwt.verify(token, SECRET_KEY); //перевірка чи ми кодували і чи валідний токен
         const user = await User.findById(id); //перевіряємо чи є користувач взагалі
         if (!user) {
-            next(HttpErrors(401, 'User is not fount')); //якщо немає - викидаємо помилку
+            next(HttpErrors(401)); //якщо немає - викидаємо помилку
         }
+        req.user = user;//дізнаємося користувача, дані будуть і в контролері, щоб бачити, хто робив запит - додава, оновляв тощо
         next() //якщо є, ідемо далі
     } catch {
         next(HttpErrors(401));

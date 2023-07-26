@@ -20,7 +20,12 @@ const contactSchema = new Schema({
     favorite: {
       type: Boolean,
       default: false,
-    },
+  },
+  owner: {
+      type: Schema.Types.ObjectId, //зберігаємо ід
+      ref: "user", // з колекції user
+      required: true
+    }
 },{ versionKey: false, timestamps: true });
 
 contactSchema.post("save", handleMongooseError)
