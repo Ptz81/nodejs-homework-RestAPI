@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router()
-import ctrl from '../../controllers/contactsCtrl.js';
+import ctrl from '../../controllers/ContactCtr/contactsCtrl.js';
 import {isValidId} from '../../middlewares/isValidId.js';
 import { schemaSet } from '../../models/contact.js';
 import validateBody from '../../middlewares/validateBody.js';

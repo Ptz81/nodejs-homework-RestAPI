@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { User } from '../models/user.js';
 const { SECRET_KEY } = process.env;
 
-const authenticate = async(req, res, next) => {
+const authenticate = async (req, res, next) => {
     const { authorization = '' } = req.headers; //доступ до заголовків
     const [bearer, token] = authorization.split(' ');//виймаємо і розділяємо токен та Bearer
     if (bearer !== "Bearer") {
@@ -11,8 +11,8 @@ const authenticate = async(req, res, next) => {
     }//перевірка чи Bearer відповідає 
     try {
         const { id } = jwt.verify(token, SECRET_KEY); //перевірка чи ми кодували і чи валідний токен
-        const user = await User.findById(id); //перевіряємо чи є користувач взагалі
-        if (!user) {
+        const user = await User.findById(id); //перевіряємо чи є користувач взагалі чи є токен і чи він валідний
+        if (!user || !user.token || user.token !==token) {
             next(HttpErrors(401)); //якщо немає - викидаємо помилку
         }
         req.user = user;//дізнаємося користувача, дані будуть і в контролері, щоб бачити, хто робив запит - додава, оновляв тощо

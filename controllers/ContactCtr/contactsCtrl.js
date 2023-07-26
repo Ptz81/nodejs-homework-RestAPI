@@ -1,5 +1,4 @@
-import {Contact} from '../models/contact.js';
-import ctrlWrapper from '../helpers/ctrlWrapper.js';
+import ctrlWrapper from '../../helpers/ctrlWrapper.js';
 import getAll from './all.js'
 import getById from './getById.js'
 import addContact from './add.js'

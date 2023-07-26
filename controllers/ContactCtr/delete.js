@@ -1,4 +1,4 @@
-import {Contact} from '../models/contact.js';
+import {Contact} from '../../models/contact.js'
 const deleteContact = async (req, res) => {
     const { id } = req.params;
     const result = await Contact.findByIdAndDelete(id);

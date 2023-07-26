@@ -1,4 +1,5 @@
-import {Contact} from '../models/contact.js';
+import { Contact } from '../../models/contact.js';
+
 const addContact = async (req, res) => {
     const { _id: owner } = req.user;
     const result = await Contact.create({...req.body, owner});
