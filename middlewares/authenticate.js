@@ -13,7 +13,7 @@ const authenticate = async(req, res, next) => {
         const { id } = jwt.verify(token, SECRET_KEY); //перевірка чи ми кодували і чи правильний токен
         const user = await User.findById(id); //перевіряємо чи є користувач взагалі
         if (!user) {
-            next(HttpErrors(401)); //якщо немає - викидаємо помилку
+            next(HttpErrors(401, 'User is not fount')); //якщо немає - викидаємо помилку
         }
         next() //якщо є, ідемо далі
     } catch {
