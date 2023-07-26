@@ -1,10 +1,11 @@
 import HttpErrors from '../helpers/HttpError.js';
 import ctrlWrapper from '../helpers/ctrlWrapper.js';
 import { User } from '../models/user.js';
+// import handleMongooseError from '../helpers/index.js'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
-dotenv.config()
+import 'dotenv/config.js';
+
 const { SECRET_KEY } = process.env;
 
 const register = async (req, res) => {       //запит на реєстрацію
@@ -24,7 +25,7 @@ const login = async (req, res) => {
     const { email, password } = req.body;//запит на логін
     const user = await User.findOne({ email });     //перевіряємо чи людина є зареєстрована
     if (!user) {
-        throw HttpErrors(401, 'Email or Password incorrect!');      //якщо немає, викидаємо помилку
+        throw HttpErrors(401, 'Email or password are incorrect!');      //якщо немає, викидаємо помилку
     }
     const comparePassword = await bcrypt.compare(password, user.password);    //якщо є порівнюємо пароль з бази із введеним
     if (!comparePassword) {

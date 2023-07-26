@@ -1,7 +1,6 @@
-// import dotenv from 'dotenv';
+// import 'dotenv/config()';
 // import jwt from 'jsonwebtoken';
 
-// dotenv.config()
 // const { SECRET_KEY } = process.env;
 // const payload = {
 //     id: user._id,
