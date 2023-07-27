@@ -23,7 +23,7 @@ const contactSchema = new Schema({
   },
   owner: {
       type: Schema.Types.ObjectId, //зберігаємо ід
-      ref: "user", // з колекції user
+      ref: "users", // з колекції user
 
     }
 },{ versionKey: false, timestamps: true });

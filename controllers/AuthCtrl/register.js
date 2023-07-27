@@ -1,7 +1,7 @@
 import HttpErrors from '../../helpers/HttpError.js';
 import { User } from '../../models/user.js';
 import bcrypt from 'bcrypt';
-import 'dotenv/config.js';
+import 'dotenv/config';
 
 const register = async (req, res) => {       //запит на реєстрацію
     const { email, password } = req.body;

@@ -4,18 +4,20 @@ import ctrl from '../../controllers/ContactCtr/contactsCtrl.js';
 import {isValidId} from '../../middlewares/isValidId.js';
 import { schemaSet } from '../../models/contact.js';
 import validateBody from '../../middlewares/validateBody.js';
-import authenticate from '../../middlewares/authenticate.js'
+import authenticate from '../../middlewares/authenticate.js';
+import isEmptyBody from '../../helpers/isEmptyBody.js';
 
+router.use(authenticate)
 
-router.get('/', authenticate, ctrl.getAll);
+router.get('/', ctrl.getAll);
 
-router.get('/:id',authenticate, isValidId, ctrl.getById);
+router.get('/:id',isValidId, ctrl.getById);
 
-router.post('/', authenticate, validateBody(schemaSet.addSchema), ctrl.addContact);
+router.post('/', isEmptyBody, validateBody(schemaSet.addSchema), ctrl.addContact);
 
-router.delete('/:id', authenticate, isValidId, ctrl.deleteContact);
+router.delete('/:id', isValidId, ctrl.deleteContact);
 
-router.put('/:id', authenticate, isValidId, validateBody(schemaSet.addSchema), ctrl.updateContact);
-router.patch('/:id/favorite', isValidId, validateBody(schemaSet.updateFavoriteSchema), ctrl.updateFavorite);
+router.put('/:id', isEmptyBody, isValidId, validateBody(schemaSet.addSchema), ctrl.updateContact);
+router.patch('/:id/favorite', isEmptyBody, isValidId, validateBody(schemaSet.updateFavoriteSchema), ctrl.updateFavorite);
 
 export default router;
