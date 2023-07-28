@@ -15,6 +15,8 @@ app.use(express.json())
 app.use('/api/auth', authRouter)
 app.use('/api/contacts', router)
 
+app.use(express.static("public"));//якщо прийде запит на статичний файл, шукай у папці Паблік
+
 app.use((req, res) => {
   res.status(404).json({ message: 'Not found' })
 })

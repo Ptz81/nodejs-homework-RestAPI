@@ -1,8 +1,8 @@
 import multer from "multer";
 import path from "path";
-import app from "../app";
 
-const tempDir = path.join(__dirname, "temp");//шлях до папки
+
+const tempDir = path.join(__dirname, "../", "temp");//шлях до папки
 //налаштування мідлвари - де зберегти і під яким ім'ям
 const multerConfig = multer.diskStorage({
     destination: tempDir,//місце збереження файлу. Оскільки ми немаємо багато даних, то це місце збереження тимчасове, а мідлвара універсальна. Забереме файл через контролер
@@ -12,10 +12,10 @@ const multerConfig = multer.diskStorage({
     }
 })
 //мідлвара для зберігання
-const upload = multer({
+const uploadFunc = multer({
     storage: multerConfig,
 })
-export default upload;
+export default uploadFunc;
 
 //використання
 // const avatarDir = path.join(_dirname, 'public', 'avatar')
@@ -26,7 +26,7 @@ export default upload;
 //     const {path:tempDir, originalname} = req.file // старий шлях до файлу з тимчасової папки
 //     const newPathDir = path.join(avatarDir, originalname) //створюємо новий шлях до файлу 
 // await fs.rename(tempDir, newPathDir) //переміщаємо файл з темп у аватар
-// const cover = path.join('public', 'avatar', originalname); //шдях до файлу
+// const cover = path.join('avatar', originalname); //шдях до файлу
 // const newContact = {   //дані нового користувача
 //      id:nanoid,
 //      ...req.body,
