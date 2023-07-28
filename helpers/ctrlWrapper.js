@@ -8,4 +8,4 @@ const ctrlWrapper = ctrl => {
     }
     return func;
 }
-export default ctrlWrapper;
+export default ctrlWrapper; //функція обгортка, яка обгортає контролер та додає до неї try/catch
