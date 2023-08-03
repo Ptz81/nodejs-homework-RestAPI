@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 
 import authRouter from './routes/api/auth.js'
 
+
 const app = express()
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short'
 dotenv.config()
