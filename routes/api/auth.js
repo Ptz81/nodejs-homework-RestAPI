@@ -8,6 +8,8 @@ import uploadFunc from "../../middlewares/multerconfig.js";
 const router = express.Router();
 //роут на реєстрацію
 router.post('/register', validateBody(userSchemaSet.registerSchema), ctr.register);
+
+router.get('/verify/:verificationCode', ctr.verifyEmail)
 //роут на логін
 router.post('/login', validateBody(userSchemaSet.loginSchema), ctr.login);
 //роут на поточного корисувача

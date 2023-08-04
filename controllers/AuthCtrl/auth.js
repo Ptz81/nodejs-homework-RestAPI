@@ -5,6 +5,7 @@ import login from './login.js';
 import getCurrent from './current.js';
 import logout from './logout.js';
 import updateAvatar from './updateAvatar.js';
+import verifyEmail from './verifyEmail.js'
 
 
 export default {
@@ -12,5 +13,6 @@ export default {
     login: ctrlWrapper(login),
     getCurrent: ctrlWrapper(getCurrent),
     logout: ctrlWrapper(logout),
-    updateAvatar: ctrlWrapper(updateAvatar)
+    updateAvatar: ctrlWrapper(updateAvatar),
+    verifyEmail: ctrlWrapper(verifyEmail),
 }

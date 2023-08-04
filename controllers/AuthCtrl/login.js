@@ -10,7 +10,10 @@ const login = async (req, res) => {
     const user = await User.findOne({ email });     //перевіряємо чи людина є зареєстрована
     if (!user) {
         throw HttpErrors(401, 'Email or password are incorrect!');      //якщо немає, викидаємо помилку
-    }
+    };
+    if (!user.verify) {
+        throw HttpErrors(401, 'You are mot verify!');
+    };
     const comparePassword = await bcrypt.compare(password, user.password);    //якщо є порівнюємо пароль з бази із введеним
     if (!comparePassword) {
         throw HttpErrors(401, 'Email or Password incorrect!');    //якщо пароль не вірний викидаємо помилку
@@ -18,7 +21,7 @@ const login = async (req, res) => {
 const payload = {
     id: user._id,
 }//якщо співпав, створюємо токен
-    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '23h' })
+    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: '23h' });
     await User.findByIdAndUpdate(user._id, { token });
     res.json({
         token,
