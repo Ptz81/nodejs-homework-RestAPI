@@ -13,7 +13,7 @@ export default sendMail;
 
 // const email = {
 //     to: 'wolayob762@mliok.com',
-//     from: 'mr.taras.papka@gmail.com',
+//     from: 'taras@gmail.com',
 //     subject: 'test mail',
 //     html: "<p>Test mail from localhost</p>",
 // }

@@ -5,7 +5,7 @@ const getAll = async (req, res) => {
   //пагінація
   const { page = 1, limit = 10, ...query } = req.query; //отримуємо параметри запиту та встановлюємо значення за замовчуванням
   const skip = (page - 1) * limit; //вираховуємо параметри мангусу - відповідно до параметрів запиту
-  const result = (await Contact.find({owner, ...query}, "-createdAt -updatedAt", {skip, limit})).populate('owner', 'name email');//додаємо власника, тоді будуть повертатись людині її додані книги
+  const result = await Contact.find({owner, ...query}, "-createdAt -updatedAt", {skip, limit}).populate('owner', 'name email');//додаємо власника, тоді будуть повертатись людині її додані книги
   res.json(result);
 }
 
