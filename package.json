@@ -28,6 +28,7 @@
     "nanoid": "^4.0.2",
     "nodemailer": "^6.9.4",
     "path": "^0.12.7",
+    "socket.io": "^4.7.2",
     "ws": "^8.13.0"
   },
   "devDependencies": {
